@@ -13,6 +13,7 @@ struct RelayView: View {
     
     let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
     @State var conn_color: Color = .gray
+    @State private var relayEnabled = true
     
     func update_connection_color() {
         for relay in state.pool.relays {
@@ -31,10 +32,23 @@ struct RelayView: View {
     
     var body: some View {
         HStack {
-            Circle()
-                .frame(width: 8.0, height: 8.0)
-                .foregroundColor(conn_color)
-            Text(relay)
+            Toggle(isOn: $relayEnabled, label: {
+                HStack{
+                    Image(systemName: "network")
+                        .foregroundColor(conn_color)
+                    if relayEnabled {
+                        Text(relay)
+                    } else {
+                        Text(relay)
+                            .foregroundColor(.gray)
+                    }
+                }
+            })
+        }
+        .onChange(of: relayEnabled) {_ in
+            if let privkey = state.keypair.privkey {
+                DisableAction(privkey: privkey)
+            }
         }
         .onReceive(timer) { _ in
             update_connection_color()
@@ -81,6 +95,9 @@ struct RelayView: View {
             Label(NSLocalizedString("Delete", comment: "Button to delete a relay server that the user connects to."), systemImage: "trash")
         }
         .tint(.red)
+    }
+    
+    func DisableAction(privkey: String){
     }
 }
 
