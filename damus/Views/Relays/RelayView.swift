@@ -13,7 +13,6 @@ struct RelayView: View {
     
     let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
     @State var conn_color: Color = .gray
-    @State private var relayEnabled = true
     
     func update_connection_color() {
         for relay in state.pool.relays {
@@ -31,23 +30,21 @@ struct RelayView: View {
     }
     
     var body: some View {
-        HStack {
-            Toggle(isOn: $relayEnabled, label: {
-                HStack{
-                    Image(systemName: "network")
-                        .foregroundColor(conn_color)
-                    if relayEnabled {
-                        Text(relay)
-                    } else {
-                        Text(relay)
-                            .foregroundColor(.gray)
-                    }
-                }
-            })
-        }
-        .onChange(of: relayEnabled) {_ in
-            if let privkey = state.keypair.privkey {
-                DisableAction(privkey: privkey)
+        ZStack {
+            NavigationLink ( destination:
+                RelayDetailView(state: state, relay: relay, conn_color: conn_color)
+            ){
+                EmptyView()
+            }
+            .opacity(0.0)
+
+            HStack {
+                Image(systemName: "network")
+                    .foregroundColor(conn_color)
+                Text(relay)
+                Spacer()
+                Image(systemName: "info.circle")
+                    .foregroundColor(Color.accentColor)
             }
         }
         .onReceive(timer) { _ in

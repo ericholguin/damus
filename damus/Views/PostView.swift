@@ -18,6 +18,7 @@ struct PostView: View {
     @State var post: String = ""
     @State var showRelays: Bool = false
     @FocusState var focus: Bool
+    @State var showPrivateKeyWarning: Bool = false
     
     let replying_to: NostrEvent?
     let references: [ReferencedId]
@@ -66,7 +67,11 @@ struct PostView: View {
 
                 if !is_post_empty {
                     Button(NSLocalizedString("Post", comment: "Button to post a note.")) {
-                        self.send_post()
+                        showPrivateKeyWarning = contentContainsPrivateKey(self.post)
+
+                        if !showPrivateKeyWarning {
+                            self.send_post()
+                        }
                     }
                     .font(.system(size: 14, weight: .bold))
                     .frame(width: 80, height: 30)
@@ -79,7 +84,7 @@ struct PostView: View {
             
             HStack(alignment: .top) {
                 
-                ProfilePicView(pubkey: damus_state.pubkey, size: 45.0, highlight: .none, profiles: damus_state.profiles, contacts: damus_state.contacts)
+                ProfilePicView(pubkey: damus_state.pubkey, size: 45.0, highlight: .none, profiles: damus_state.profiles)
                 
                 VStack(alignment: .leading) {
                     Button {
@@ -144,6 +149,14 @@ struct PostView: View {
             }
         }
         .padding()
+        .alert(NSLocalizedString("Note contains \"nsec1\" private key. Are you sure?", comment: "Alert user that they might be attempting to paste a private key and ask them to confirm."), isPresented: $showPrivateKeyWarning, actions: {
+            Button(NSLocalizedString("No", comment: "Button to cancel out of posting a note after being alerted that it looks like they might be posting a private key."), role: .cancel) {
+                showPrivateKeyWarning = false
+            }
+            Button(NSLocalizedString("Yes, Post with Private Key", comment: "Button to proceed with posting a note even though it looks like they might be posting a private key."), role: .destructive) {
+                self.send_post()
+            }
+        })
     }
 }
 
