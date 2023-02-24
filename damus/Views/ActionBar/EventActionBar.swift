@@ -142,9 +142,7 @@ struct EventActionBar: View {
             }
         }
         .sheet(isPresented: $show_post_sheet) {
-            if let note_id = bech32_note_id(event.id) {
-                PostView(replying_to: nil, references: [], damus_state: damus_state, quote: "@\(note_id)")
-            }
+            PostView(replying_to: nil, references: [], damus_state: damus_state, quoting: event)
         }
         .onReceive(handle_notify(.update_stats)) { n in
             let target = n.object as! String

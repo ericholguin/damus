@@ -11,6 +11,7 @@ struct NostrPost {
     let kind: NostrKind
     let content: String
     let references: [ReferencedId]
+    var quoting: NostrEvent?
     
     init (content: String, references: [ReferencedId]) {
         self.content = content
@@ -23,6 +24,15 @@ struct NostrPost {
         self.references = references
         self.kind = kind
     }
+    
+    
+    init (content: String, references: [ReferencedId], kind: NostrKind, quoting: NostrEvent) {
+        self.content = content
+        self.references = references
+        self.kind = kind
+        self.quoting = quoting
+    }
+
 }
 
 // TODO: parse nostr:{e,p}:pubkey uris as well

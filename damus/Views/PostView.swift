@@ -23,7 +23,7 @@ struct PostView: View {
     let replying_to: NostrEvent?
     let references: [ReferencedId]
     let damus_state: DamusState
-    var quote: String = ""
+    let quoting: NostrEvent?
 
     @Environment(\.presentationMode) var presentationMode
 
@@ -46,9 +46,14 @@ struct PostView: View {
             kind = .chat
         }
         let content = self.post.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-        let new_post = NostrPost(content: content, references: references, kind: kind)
-
-        NotificationCenter.default.post(name: .post, object: NostrPostResult.post(new_post))
+        
+        if let quoting = quoting {
+            let new_post = NostrPost(content: content, references: references, kind: .quote, quoting: quoting)
+            NotificationCenter.default.post(name: .post, object: NostrPostResult.post(new_post))
+        } else {
+            let new_post = NostrPost(content: content, references: references, kind: kind)
+            NotificationCenter.default.post(name: .post, object: NostrPostResult.post(new_post))
+        }
 
         if let replying_to {
             damus_state.drafts.replies.removeValue(forKey: replying_to)
@@ -140,8 +145,8 @@ struct PostView: View {
                 post = damus_state.drafts.post
             }
             
-            if !quote.isEmpty {
-                post = quote
+            if quoting != nil {
+                
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -190,6 +195,6 @@ func get_searching_string(_ post: String) -> String? {
 
 struct PostView_Previews: PreviewProvider {
     static var previews: some View {
-        PostView(replying_to: nil, references: [], damus_state: test_damus_state())
+        PostView(replying_to: nil, references: [], damus_state: test_damus_state(), quoting: nil)
     }
 }

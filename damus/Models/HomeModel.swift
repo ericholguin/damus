@@ -119,6 +119,8 @@ class HomeModel: ObservableObject {
             handle_boost_event(sub_id: sub_id, ev)
         case .like:
             handle_like_event(ev)
+        case .quote:
+            handle_text_event(sub_id: sub_id, ev)
         case .dm:
             handle_dm(ev)
         case .delete:

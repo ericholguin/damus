@@ -325,7 +325,7 @@ struct ContentView: View {
             case .report(let target):
                 MaybeReportView(target: target)
             case .post:
-                PostView(replying_to: nil, references: [], damus_state: damus_state!)
+                PostView(replying_to: nil, references: [], damus_state: damus_state!, quoting: nil)
             case .reply(let event):
                 ReplyView(replying_to: event, damus: damus_state!)
             case .event:
@@ -461,7 +461,8 @@ struct ContentView: View {
                 //let to_relays = tup.1
                 print("post \(post.content)")
                 let new_ev = post_to_event(post: post, privkey: privkey, pubkey: pubkey)
-                self.damus_state?.pool.send(.event(new_ev))
+                print("EVENT OUTPUT: -------------------------------\n \(new_ev)")
+                //self.damus_state?.pool.send(.event(new_ev))
             case .cancel:
                 active_sheet = nil
                 print("post cancelled")
