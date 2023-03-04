@@ -48,6 +48,8 @@ struct NoteContentView: View {
     func MainContent() -> some View {
         return VStack(alignment: .leading) {
             
+            let columns = Array(repeating: GridItem(.flexible(), spacing: 15), count: 2)
+            
             if size == .selected {
                 SelectableText(attributedString: artifacts.content)
                 TranslateView(damus_state: damus_state, event: event)
@@ -57,14 +59,26 @@ struct NoteContentView: View {
             }
 
             if show_images && artifacts.images.count > 0 {
-                ImageCarousel(urls: artifacts.images)
-            } else if !show_images && artifacts.images.count > 0 {
-                ZStack {
-                    ImageCarousel(urls: artifacts.images)
-                    Blur()
-                        .disabled(true)
+                //ImageCarousel(urls: artifacts.images)
+                LazyVGrid(columns: columns, alignment: .leading, spacing: 10) {
+                    ForEach(artifacts.images.indices,id: \.self) { index in
+                        ImageGrid(urls: artifacts.images, index: index)
+                    }
                 }
-                .cornerRadius(10)
+            } else if !show_images && artifacts.images.count > 0 {
+                LazyVGrid(columns: columns, alignment: .leading, spacing: 10) {
+                    ForEach(artifacts.images.indices,id: \.self) { index in
+                        ImageGrid(urls: artifacts.images, index: index)
+                    }
+                }
+                Blur()
+                    .disabled(true)
+//                ZStack {
+//                    ImageCarousel(urls: artifacts.images)
+//                    Blur()
+//                        .disabled(true)
+//                }
+//                .cornerRadius(10)
             }
             
             if artifacts.invoices.count > 0 {

@@ -186,6 +186,71 @@ struct ImageView: View {
     }
 }
 
+struct ImageGrid: View {
+    var urls: [URL]
+    var index: Int
+    @State var open_sheet: Bool = false
+
+    var body: some View {
+        ZStack {
+            
+            if index <= 3 {
+                KFAnimatedImage(urls[index])
+                    .imageContext(.note)
+                    .cancelOnDisappear(true)
+                    .configure { view in
+                        view.framePreloadCount = 3
+                    }
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(12)
+                    .frame(width: getWidth(index: index), height: 200)
+                    .contextMenu {
+                        Button(NSLocalizedString("Copy Image", comment: "Context menu option to copy an image to clipboard.")) {
+                            UIPasteboard.general.string = urls[index].absoluteString
+                        }
+                    }
+            }
+            
+            if urls.count > 4 && index == 3{
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.black.opacity(0.3))
+                
+                let remainingImages = urls.count - 4
+                Text("+\(remainingImages)")
+                    .font(.system(size: 24, weight: .heavy))
+                    .foregroundColor(.white)
+            }
+        }
+        .fullScreenCover(isPresented: $open_sheet) {
+            ImageView(urls: urls)
+        }
+        .frame(height: 200)
+        .clipped()
+        .onTapGesture {
+            open_sheet = true
+        }
+    }
+    
+    func getWidth(index: Int)->CGFloat {
+        let width = getRect().width - 100
+        if urls.count % 2 == 0 {
+            return width / 2
+        } else {
+            if index == urls.count - 1 {
+                return width
+            } else {
+                return width / 2
+            }
+        }
+    }
+}
+
+extension View {
+    func getRect()->CGRect {
+        return UIScreen.main.bounds
+    }
+}
+
 struct ImageCarousel: View {
     var urls: [URL]
     
@@ -232,6 +297,7 @@ struct ImageCarousel: View {
 
 struct ImageCarousel_Previews: PreviewProvider {
     static var previews: some View {
+        //ImageGrid(url: URL(string: "https://jb55.com/red-me.jpg")!)
         ImageCarousel(urls: [URL(string: "https://jb55.com/red-me.jpg")!,URL(string: "https://jb55.com/red-me.jpg")!])
     }
 }
