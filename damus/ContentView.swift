@@ -44,6 +44,7 @@ enum ThreadState {
 }
 
 enum FilterState : Int {
+    case media = 2
     case posts_and_replies = 1
     case posts = 0
     
@@ -52,6 +53,8 @@ enum FilterState : Int {
         case .posts:
             return !ev.is_reply(nil)
         case .posts_and_replies:
+            return true
+        case .media:
             return true
         }
     }
@@ -102,12 +105,15 @@ struct ContentView: View {
         VStack {
             ZStack {
                 TabView(selection: $filter_state) {
-                    contentTimelineView(filter: FilterState.posts.filter)
+                    contentTimelineView(filter: FilterState.posts.filter, mediaOnly: false)
                         .tag(FilterState.posts)
                         .id(FilterState.posts)
-                    contentTimelineView(filter: FilterState.posts_and_replies.filter)
+                    contentTimelineView(filter: FilterState.posts_and_replies.filter, mediaOnly: false)
                         .tag(FilterState.posts_and_replies)
                         .id(FilterState.posts_and_replies)
+                    contentTimelineView(filter: FilterState.posts_and_replies.filter, mediaOnly: true)
+                        .tag(FilterState.media)
+                        .id(FilterState.media)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 
@@ -123,6 +129,7 @@ struct ContentView: View {
                 CustomPicker(selection: $filter_state, content: {
                     Text("Posts", comment: "Label for filter for seeing only posts (instead of posts and replies).").tag(FilterState.posts)
                     Text("Posts & Replies", comment: "Label for filter for seeing posts and replies (instead of only posts).").tag(FilterState.posts_and_replies)
+                    Text("Music", comment: "Label for filter for seeing music.").tag(FilterState.media)
                 })
                 Divider()
                     .frame(height: 1)
@@ -131,10 +138,10 @@ struct ContentView: View {
         }
     }
     
-    func contentTimelineView(filter: (@escaping (NostrEvent) -> Bool)) -> some View {
+    func contentTimelineView(filter: (@escaping (NostrEvent) -> Bool), mediaOnly: Bool) -> some View {
         ZStack {
             if let damus = self.damus_state {
-                TimelineView(events: home.events, loading: $home.loading, damus: damus, show_friend_icon: false, filter: filter)
+                TimelineView(events: home.events, loading: $home.loading, damus: damus, show_friend_icon: false, filter: filter, mediaOnly: mediaOnly)
             }
         }
     }

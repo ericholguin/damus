@@ -429,6 +429,7 @@ struct ProfileView: View {
                         CustomPicker(selection: $filter_state, content: {
                             Text("Posts", comment: "Label for filter for seeing only your posts (instead of posts and replies).").tag(FilterState.posts)
                             Text("Posts & Replies", comment: "Label for filter for seeing your posts and replies (instead of only your posts).").tag(FilterState.posts_and_replies)
+                            Text("Music", comment: "Label for filter for seeing media.").tag(FilterState.media)
                         })
                         Divider()
                             .frame(height: 1)
@@ -440,6 +441,9 @@ struct ProfileView: View {
                     }
                     if filter_state == FilterState.posts_and_replies {
                         InnerTimelineView(events: profile.events, damus: damus_state, show_friend_icon: false, filter: FilterState.posts_and_replies.filter)
+                    }
+                    if filter_state == FilterState.media {
+                        InnerTimelineView(events: profile.events, damus: damus_state, show_friend_icon: false, filter: FilterState.posts_and_replies.filter, mediaOnly: true)
                     }
                 }
                 .padding(.horizontal, Theme.safeAreaInsets?.left)

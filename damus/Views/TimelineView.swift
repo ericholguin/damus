@@ -22,6 +22,24 @@ struct TimelineView: View {
     let damus: DamusState
     let show_friend_icon: Bool
     let filter: (NostrEvent) -> Bool
+    var mediaOnly: Bool = false
+    
+    init(events: EventHolder, loading: Binding<Bool>, damus: DamusState, show_friend_icon: Bool, filter: @escaping (NostrEvent) -> Bool, mediaOnly: Bool) {
+        self.events = events
+        self.damus = damus
+        self.show_friend_icon = show_friend_icon
+        self.filter = filter
+        self.mediaOnly = mediaOnly
+        self._loading = loading
+    }
+    
+    init(events: EventHolder, loading: Binding<Bool>, damus: DamusState, show_friend_icon: Bool, filter: @escaping (NostrEvent) -> Bool) {
+        self.events = events
+        self.damus = damus
+        self.show_friend_icon = show_friend_icon
+        self.filter = filter
+        self._loading = loading
+    }
     
     var body: some View {
         MainContent
@@ -38,7 +56,7 @@ struct TimelineView: View {
                     .id("startblock")
                     .frame(height: 1)
                 
-                InnerTimelineView(events: events, damus: damus, show_friend_icon: show_friend_icon, filter: loading ? { _ in true } : filter)
+                InnerTimelineView(events: events, damus: damus, show_friend_icon: show_friend_icon, filter: loading ? { _ in true } : filter, mediaOnly: mediaOnly)
                     .redacted(reason: loading ? .placeholder : [])
                     .shimmer(loading)
                     .disabled(loading)

@@ -109,7 +109,7 @@ struct NoteContentView: View {
                 }
                 
                 if show_images, artifacts.links.count == 1 {
-                    let meta = await getMetaData(for: artifacts.links.first!)
+                    let meta = await getMetaData(for: artifacts.links.first!)                    
                     
                     damus_state.previews.store(evid: self.event.id, preview: meta)
                     guard case .value(let cached) = damus_state.previews.lookup(self.event.id) else {
