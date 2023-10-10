@@ -43,7 +43,7 @@ struct EventActionBar: View {
         HStack {
             if damus_state.keypair.privkey != nil {
                 HStack(spacing: 4) {
-                    EventActionButton(img: "bubble2", col: bar.replied ? DamusColors.purple : Color.gray) {
+                    EventActionButton(img: "bubble2", size: damus_state.settings.font_size, col: bar.replied ? DamusColors.purple : Color.gray) {
                         notify(.compose(.replying_to(event)))
                     }
                     .accessibilityLabel(NSLocalizedString("Reply", comment: "Accessibility label for reply button"))
@@ -55,7 +55,7 @@ struct EventActionBar: View {
             Spacer()
             HStack(spacing: 4) {
                 
-                EventActionButton(img: "repost", col: bar.boosted ? Color.green : nil) {
+                EventActionButton(img: "repost", size: damus_state.settings.font_size, col: bar.boosted ? Color.green : nil) {
                     self.show_repost_action = true
                 }
                 .accessibilityLabel(NSLocalizedString("Reposts", comment: "Accessibility label for boosts button"))
@@ -88,7 +88,7 @@ struct EventActionBar: View {
             }
 
             Spacer()
-            EventActionButton(img: "upload", col: Color.gray) {
+            EventActionButton(img: "upload", size: damus_state.settings.font_size, col: Color.gray) {
                 show_share_action = true
             }
             .accessibilityLabel(NSLocalizedString("Share", comment: "Button to share a note"))
@@ -148,13 +148,13 @@ struct EventActionBar: View {
 }
 
 
-func EventActionButton(img: String, col: Color?, action: @escaping () -> ()) -> some View {
+func EventActionButton(img: String, size: Double, col: Color?, action: @escaping () -> ()) -> some View {
     Image(img)
         .resizable()
         .foregroundColor(col == nil ? Color.gray : col!)
         .font(.footnote.weight(.medium))
         .aspectRatio(contentMode: .fit)
-        .frame(width: 20, height: 20)
+        .frame(width: 20 * size, height: 20 * size)
         .onTapGesture {
             action()
         }
@@ -201,12 +201,12 @@ struct LikeButton: View {
         Group {
             if let liked_emoji {
                 buildMaskView(for: liked_emoji)
-                    .frame(width: 20, height: 20)
+                    .frame(width: 20 * damus_state.settings.font_size, height: 20 * damus_state.settings.font_size)
             } else {
                 Image("shaka")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 20, height: 20)
+                    .frame(width: 20 * damus_state.settings.font_size, height: 20 * damus_state.settings.font_size)
                     .foregroundColor(.gray)
             }
         }

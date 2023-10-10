@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FriendIcon: View {
+    let damus_state: DamusState
     let friend: FriendType
     
     var body: some View {
@@ -17,11 +18,11 @@ struct FriendIcon: View {
                 LINEAR_GRADIENT
                     .mask(Image(systemName: "person.fill.checkmark")
                         .resizable()
-                    ).frame(width: 20, height: 14)
+                    ).frame(width: 20 * damus_state.settings.font_size, height: 14 * damus_state.settings.font_size)
             case .fof:
                 Image(systemName: "person.fill.and.arrow.left.and.arrow.right")
                     .resizable()
-                    .frame(width: 21, height: 14)
+                    .frame(width: 21 * damus_state.settings.font_size, height: 14 * damus_state.settings.font_size)
                     .foregroundColor(.gray)
             }
         }
@@ -31,9 +32,9 @@ struct FriendIcon: View {
 struct FriendIcon_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            FriendIcon(friend: .friend)
+            FriendIcon(damus_state: test_damus_state, friend: .friend)
             
-            FriendIcon(friend: .fof)
+            FriendIcon(damus_state: test_damus_state, friend: .fof)
         }
     }
 }

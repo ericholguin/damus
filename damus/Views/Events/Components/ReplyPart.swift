@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ReplyPart: View {
+    let state: DamusState
     let events: EventCache
     let event: NostrEvent
     let keypair: Keypair
@@ -24,7 +25,7 @@ struct ReplyPart: View {
     var body: some View {
         Group {
             if event_is_reply(event.event_refs(keypair)) {
-                ReplyDescription(event: event, replying_to: replying_to, ndb: ndb)
+                ReplyDescription(state: state, event: event, replying_to: replying_to, ndb: ndb)
             } else {
                 EmptyView()
             }
@@ -34,6 +35,6 @@ struct ReplyPart: View {
 
 struct ReplyPart_Previews: PreviewProvider {
     static var previews: some View {
-        ReplyPart(events: test_damus_state.events, event: test_note, keypair: Keypair(pubkey: .empty, privkey: nil), ndb: test_damus_state.ndb)
+        ReplyPart(state: test_damus_state, events: test_damus_state.events, event: test_note, keypair: Keypair(pubkey: .empty, privkey: nil), ndb: test_damus_state.ndb)
     }
 }

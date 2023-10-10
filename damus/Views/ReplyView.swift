@@ -33,13 +33,13 @@ struct ReplyView: View {
                     }
                     .joined(separator: " ")
                 if names.isEmpty {
-                    Text("Replying to \(Text("self", comment: "Part of a larger sentence 'Replying to self' in US English. 'self' indicates that the user is replying to themself and no one else.").foregroundColor(.accentColor).font(.footnote))", comment: "Indicating that the user is replying to the themself and no one else, where the parameter is 'self' in US English.")
+                    Text("Replying to \(Text("self", comment: "Part of a larger sentence 'Replying to self' in US English. 'self' indicates that the user is replying to themself and no one else.").foregroundColor(.accentColor).font(eventviewsize_to_font(.normal, font_size: damus.settings.font_size)))", comment: "Indicating that the user is replying to the themself and no one else, where the parameter is 'self' in US English.")
                         .foregroundColor(.gray)
-                        .font(.footnote)
+                        .font(eventviewsize_to_font(.normal, font_size: damus.settings.font_size))
                 } else {
-                    Text("Replying to \(Text(verbatim: names).foregroundColor(.accentColor).font(.footnote))", comment: "Indicating that the user is replying to the following listed people.")
+                    Text("Replying to \(Text(verbatim: names).foregroundColor(.accentColor).font(eventviewsize_to_font(.normal, font_size: damus.settings.font_size)))", comment: "Indicating that the user is replying to the following listed people.")
                         .foregroundColor(.gray)
-                        .font(.footnote)
+                        .font(eventviewsize_to_font(.normal, font_size: damus.settings.font_size))
                 }
             }
             .onTapGesture {

@@ -30,7 +30,7 @@ struct EventTop: View {
         HStack(alignment: .center, spacing: 0) {
             ProfileName(is_anon: is_anon)
             TimeDot()
-            RelativeTime(time: state.events.get_cache_data(event.id).relative_time)
+            RelativeTime(time: state.events.get_cache_data(event.id).relative_time, state: state)
             Spacer()
             EventMenuContext(damus: state, event: event)
         }

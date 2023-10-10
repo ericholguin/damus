@@ -114,7 +114,7 @@ struct ZapButton: View {
                         .foregroundColor(zap_color)
                         .font(.footnote.weight(.medium))
                         .aspectRatio(contentMode: .fit)
-                        .frame(width:20, height: 20)
+                        .frame(width:20 * damus_state.settings.font_size, height: 20 * damus_state.settings.font_size)
                 })
             }
 

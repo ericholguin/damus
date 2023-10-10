@@ -84,7 +84,7 @@ struct ProfileName: View {
 
         HStack(spacing: 2) {
             Text(verbatim: "\(prefix)\(name_choice(profile: profile))")
-                .font(.body)
+                .font(eventviewsize_to_font(.normal, font_size: damus_state.settings.font_size))
                 .fontWeight(prefix == "@" ? .none : .bold)
 
             if let nip05 = current_nip05 {
@@ -92,7 +92,7 @@ struct ProfileName: View {
             }
 
             if let friend = friend_type, current_nip05 == nil {
-                FriendIcon(friend: friend)
+                FriendIcon(damus_state: damus_state, friend: friend)
             }
 
             if onlyzapper(profile: profile) {

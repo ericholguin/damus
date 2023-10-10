@@ -63,11 +63,13 @@ struct EventProfileName: View {
             switch current_display_name(profile) {
             case .one(let one):
                 Text(one)
-                    .font(.body.weight(.bold))
+                    .fontWeight(.bold)
+                    .font(eventviewsize_to_font(size, font_size: damus_state.settings.font_size))
                 
             case .both(username: let username, displayName: let displayName):
                 Text(verbatim: displayName)
-                    .font(.body.weight(.bold))
+                    .fontWeight(.bold)
+                    .font(eventviewsize_to_font(size, font_size: damus_state.settings.font_size))
                 
                 Text(verbatim: username)
                     .foregroundColor(.gray)
@@ -82,7 +84,7 @@ struct EventProfileName: View {
             
              
             if let frend = friend_type {
-                FriendIcon(friend: frend)
+                FriendIcon(damus_state: damus_state, friend: frend)
             }
             
             if onlyzapper(profile) {

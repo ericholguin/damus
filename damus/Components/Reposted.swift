@@ -19,6 +19,7 @@ struct Reposted: View {
                     .foregroundColor(Color.gray)
             Text("Reposted", comment: "Text indicating that the note was reposted (i.e. re-shared).")
                 .foregroundColor(Color.gray)
+                .font(eventviewsize_to_font(.normal, font_size: damus.settings.font_size))
         }
     }
 }

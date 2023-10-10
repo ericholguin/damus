@@ -1,4 +1,4 @@
-//
+damus/Views/Events/Components/ReplyDescription.swift //
 //  ReplyDescription.swift
 //  damus
 //
@@ -9,13 +9,14 @@ import SwiftUI
 
 // jb55 - TODO: this could be a lot better
 struct ReplyDescription: View {
+    let state: DamusState
     let event: NostrEvent
     let replying_to: NostrEvent?
     let ndb: Ndb
 
     var body: some View {
         Text(verbatim: "\(reply_desc(ndb: ndb, event: event, replying_to: replying_to))")
-            .font(.footnote)
+            .font(eventviewsize_to_font(.small, font_size: state.settings.font_size))
             .foregroundColor(.gray)
             .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -23,7 +24,7 @@ struct ReplyDescription: View {
 
 struct ReplyDescription_Previews: PreviewProvider {
     static var previews: some View {
-        ReplyDescription(event: test_note, replying_to: test_note, ndb: test_damus_state.ndb)
+        ReplyDescription(state: test_damus_state, event: test_note, replying_to: test_note, ndb: test_damus_state.ndb)
     }
 }
 
