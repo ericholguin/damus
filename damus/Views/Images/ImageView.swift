@@ -54,7 +54,7 @@ struct ImageView: View {
                             Spacer()
                             
                             if (urls.count > 1) {
-                                CarouselDotsView(maxCount: urls.count, maxVisibleCount: 18, selectedIndex: $selectedIndex)
+                                CarouselDotsView(pages: urls.count, maxVisibleCount: 7, selectedIndex: $selectedIndex)
                             }
                         }
                     }

@@ -216,7 +216,7 @@ struct ImageCarousel: View {
                 .onTapGesture { }
             
             // This is our custom carousel image indicator
-            CarouselDotsView(maxCount: urls.count, maxVisibleCount: 18, selectedIndex: $model.selectedIndex)
+            CarouselDotsView(pages: urls.count, maxVisibleCount: 7, selectedIndex: $model.selectedIndex)
         }
     }
 }
