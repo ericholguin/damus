@@ -26,65 +26,41 @@ struct RecommendedRelayView: View {
     var body: some View {
         let meta = model_cache.model(with_relay_id: relay)?.metadata
         
-        if user_recommended {
-            HStack {
-                RelayPicView(relay: relay, icon: meta?.icon, size: 50, highlight: .none, disable_animation: false)
-                    .padding(.horizontal, 5)
-                
-                VStack(alignment: .leading) {
-                    HStack {
-                        Text(meta?.name ?? relay)
-                            .font(.headline)
-                            .padding(.bottom, 2)
-                        
-                        RelayType(is_paid: damus.relay_model_cache.model(with_relay_id: relay)?.metadata.is_paid ?? false)
-                    }
-                    
-                    Text(relay)
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
-                }
-                
-                Spacer()
-                
-                if let keypair = damus.keypair.to_full() {
-                    VStack(alignment: .center) {
-                        if damus.pool.get_relay(relay) == nil {
-                            AddButton(keypair: keypair)
-                        } else {
-                            Image(systemName: "checkmark.circle")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(DamusColors.success)
-                                .padding(.trailing, 10)
-                        }
-                    }
-                    .padding(.horizontal, 5)
-                }
-            }
-        } else {
-            VStack {
-                RelayPicView(relay: relay, icon: meta?.icon, size: 70, highlight: .none, disable_animation: false)
-                if let meta = damus.relay_model_cache.model(with_relay_id: relay)?.metadata {
-                    NavigationLink(value: Route.RelayDetail(relay: relay, metadata: meta)){
-                        EmptyView()
-                    }
-                    .opacity(0.0)
-                }
-                
+        HStack {
+            RelayPicView(relay: relay, icon: meta?.icon, size: 55, highlight: .none, disable_animation: false)
+                .padding(.horizontal, 5)
+            
+            VStack(alignment: .leading) {
                 HStack {
                     Text(meta?.name ?? relay)
-                        .lineLimit(1)
-                        .frame(maxWidth: 150)
-                        .padding(.vertical, 5)
-                }
-                .contextMenu {
-                    CopyAction(relay: relay)
+                        .font(.headline)
+                        .padding(.bottom, 2)
+                    
+                    RelayType(is_paid: damus.relay_model_cache.model(with_relay_id: relay)?.metadata.is_paid ?? false)
                 }
                 
-                if let keypair = damus.keypair.to_full() {
-                    AddButton(keypair: keypair)
+                Text(relay)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+            
+            Spacer()
+            
+            if let keypair = damus.keypair.to_full() {
+                VStack(alignment: .center) {
+                    if damus.pool.get_relay(relay) == nil {
+                        AddButton(keypair: keypair)
+                    } else {
+                        Button(action: {
+                        }) {
+                            Text(NSLocalizedString("Added", comment: "Button to show relay server is already added to list."))
+                        }
+                        .buttonStyle(NeutralButtonShape.capsule.style)
+                        .opacity(0.5)
+                        .disabled(true)
+                    }
                 }
+                .padding(.horizontal, 5)
             }
         }
     }
@@ -102,9 +78,8 @@ struct RecommendedRelayView: View {
             add_action(keypair: keypair)
         }) {
             Text(NSLocalizedString("Add", comment: "Button to add relay server to list."))
-                .padding(10)
         }
-        .buttonStyle(NeutralButtonStyle())
+        .buttonStyle(NeutralButtonShape.capsule.style)
     }
     
     func add_action(keypair: FullKeypair) {
