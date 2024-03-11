@@ -53,6 +53,10 @@ struct SelectedEventView: View {
                         .padding(.horizontal)
                 }
                 
+                ProxyView(event: event)
+                    .padding(.top, 5)
+                    .padding(.horizontal)
+                
                 EventBody(damus_state: damus, event: event, size: size, options: [.wide])
 
                 Mention
