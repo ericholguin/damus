@@ -28,7 +28,7 @@ struct SearchContentView: View {
                     Spacer()
                 }
                 .foregroundColor(.secondary)
-                .padding(.horizontal)
+                .padding()
                 
                 ForEach(results, id: \.self) { note in
                     EventView(damus: state, event: note, options: event_options)
@@ -45,8 +45,10 @@ struct SearchContentView: View {
                 
             } else if results.count == 0 && !search_text.isEmpty {
                 VStack(alignment: .center) {
-                    Image("search")
-                    Text(NSLocalizedString("No results", comment: "A label indicating that note search resulted in no results"))
+                    HStack {
+                        Image("search")
+                        Text(NSLocalizedString("No results", comment: "A label indicating that note search resulted in no results"))
+                    }
                 }
                 .padding(.vertical)
                 .foregroundColor(.secondary)

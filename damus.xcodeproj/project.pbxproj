@@ -406,6 +406,7 @@
 		5C7389B12B6EFA7100781E0A /* ProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B02B6EFA7100781E0A /* ProxyView.swift */; };
 		5C7389B72B9E692E00781E0A /* MutinyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B62B9E692E00781E0A /* MutinyButton.swift */; };
 		5C7389B92B9E69ED00781E0A /* MutinyGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B82B9E69ED00781E0A /* MutinyGradient.swift */; };
+		5C8E588B2BACB252003D0A45 /* PostingTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E588A2BACB252003D0A45 /* PostingTimelineView.swift */; };
 		5CC868DD2AA29B3200FB22BA /* NeutralButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC868DC2AA29B3200FB22BA /* NeutralButtonStyle.swift */; };
 		5CF2DCCC2AA3AF0B00984B8D /* RelayPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2DCCB2AA3AF0B00984B8D /* RelayPicView.swift */; };
 		5CF2DCCE2AABE1A500984B8D /* DamusLightGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2DCCD2AABE1A500984B8D /* DamusLightGradient.swift */; };
@@ -1330,6 +1331,7 @@
 		5C7389B02B6EFA7100781E0A /* ProxyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyView.swift; sourceTree = "<group>"; };
 		5C7389B62B9E692E00781E0A /* MutinyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutinyButton.swift; sourceTree = "<group>"; };
 		5C7389B82B9E69ED00781E0A /* MutinyGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutinyGradient.swift; sourceTree = "<group>"; };
+		5C8E588A2BACB252003D0A45 /* PostingTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingTimelineView.swift; sourceTree = "<group>"; };
 		5CC868DC2AA29B3200FB22BA /* NeutralButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutralButtonStyle.swift; sourceTree = "<group>"; };
 		5CF2DCCB2AA3AF0B00984B8D /* RelayPicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayPicView.swift; sourceTree = "<group>"; };
 		5CF2DCCD2AABE1A500984B8D /* DamusLightGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamusLightGradient.swift; sourceTree = "<group>"; };
@@ -2411,6 +2413,7 @@
 			isa = PBXGroup;
 			children = (
 				4CE0E2B529A3ED5500DB4CA2 /* InnerTimelineView.swift */,
+				5C8E588A2BACB252003D0A45 /* PostingTimelineView.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -3123,6 +3126,7 @@
 				4CB883B6297730E400DC99E7 /* LNUrls.swift in Sources */,
 				4C7FF7D52823313F009601DB /* Mentions.swift in Sources */,
 				BA4AB0AE2A63B9270070A32A /* AddEmojiView.swift in Sources */,
+				5C8E588B2BACB252003D0A45 /* PostingTimelineView.swift in Sources */,
 				4C32B94D2A9AD44700DC3548 /* Offset.swift in Sources */,
 				4C633350283D40E500B1C9C3 /* HomeModel.swift in Sources */,
 				4C987B57283FD07F0042CE38 /* FollowersModel.swift in Sources */,
