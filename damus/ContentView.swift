@@ -78,7 +78,6 @@ struct ContentView: View {
     @State var hide_bar: Bool = false
     @State var user_muted_confirm: Bool = false
     @State var confirm_overwrite_mutelist: Bool = false
-    @SceneStorage("ContentView.filter_state") var filter_state : FilterState = .posts_and_replies
     @State private var isSideBarOpened = false
     var home: HomeModel = HomeModel()
     @StateObject var navigationCoordinator: NavigationCoordinator = NavigationCoordinator()

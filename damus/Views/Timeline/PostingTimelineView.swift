@@ -17,13 +17,13 @@ struct PostingTimelineView: View {
     @State var showSearch: Bool = true
     @Binding var active_sheet: Sheets?
     @FocusState private var isSearchFocused: Bool
-    @SceneStorage("ContentView.filter_state") var filter_state : FilterState = .posts_and_replies
+    @State private var currentTab: Tab = tabs_[1]
+    @State private var tabs: [Tab] = tabs_
+    @State private var contentOffset: CGFloat = 0
+    @State private var indicatorWidth: CGFloat = 0
+    @State private var indicatorPosition: CGFloat = 0
+    @SceneStorage("PostingTimelineView.filter_state") var filter_state : FilterState = .posts_and_replies
     
-    var mystery: some View {
-        Text("Are you lost?", comment: "Text asking the user if they are lost in the app.")
-        .id("what")
-    }
-
     func content_filter(_ fstate: FilterState) -> ((NostrEvent) -> Bool) {
         var filters = ContentFilters.defaults(damus_state: damus_state)
         filters.append(fstate.filter)
@@ -72,18 +72,28 @@ struct PostingTimelineView: View {
     var body: some View {
         VStack {
             ZStack {
-                TabView(selection: $filter_state) {
-                    // This is needed or else there is a bug when switching from the 3rd or 2nd tab to first. no idea why.
-                    mystery
-                    
-                    contentTimelineView(filter: content_filter(.posts))
-                        .tag(FilterState.posts)
-                        .id(FilterState.posts)
-                    contentTimelineView(filter: content_filter(.posts_and_replies))
-                        .tag(FilterState.posts_and_replies)
-                        .id(FilterState.posts_and_replies)
+                TabView(selection: $currentTab) {
+                    ForEach(tabs) { tab in
+                        GeometryReader { _ in
+                            contentTimelineView(filter: content_filter(tab.filter))
+                        }
+                        .offsetX { rect in
+                            if currentTab.title == tab.title {
+                                contentOffset = rect.minX - (rect.width * CGFloat(index(of: tab)))
+                            }
+                            updateTabFrame(rect.width)
+                            
+                        }
+                        .tag(tab)
+                    }
+
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
+                .safeAreaInset(edge: .top, spacing: 10) {
+                    if !isSearchFocused && search.isEmpty {
+                        TabsView()
+                    }
+                }
                 
                 if damus_state.keypair.privkey != nil && (!isSearchFocused && search.isEmpty) {
                     PostButtonContainer(is_left_handed: damus_state.settings.left_handed) {
@@ -92,20 +102,64 @@ struct PostingTimelineView: View {
                 }
             }
         }
-        .safeAreaInset(edge: .top, spacing: 0) {
-            if !isSearchFocused && search.isEmpty {
-                VStack(spacing: 0) {
-                    CustomPicker(selection: $filter_state, content: {
-                        Text("Notes", comment: "Filter label for seeing only notes (instead of notes and replies).").tag(FilterState.posts)
-                        Text("Notes & Replies", comment: "Filter label for seeing notes and replies (instead of only notes).").tag(FilterState.posts_and_replies)
-                    })
-                    Divider()
-                        .frame(height: 1)
-                }
-                .background(DamusColors.adaptableWhite)
-                .transition(.opacity)
+    }
+    
+    func updateTabFrame(_ tabViewWidth: CGFloat) {
+        let inputRange = tabs.indices.compactMap { index -> CGFloat? in
+            return CGFloat(index) * tabViewWidth
+        }
+        
+        let outputRangeForWidth = tabs.compactMap { tab -> CGFloat? in
+            return tab.width
+        }
+        
+        let outputRangeForPosition = tabs.compactMap { tab -> CGFloat? in
+            return tab.minX
+        }
+        
+        let widthInterpolation = LinearInterpolation(inputRange: inputRange, outputRange: outputRangeForWidth)
+        let positionInterpolation = LinearInterpolation(inputRange: inputRange, outputRange: outputRangeForPosition)
+        
+        indicatorWidth = widthInterpolation.calculate(for: -contentOffset)
+        indicatorPosition = positionInterpolation.calculate(for: -contentOffset)
+    }
+    
+    func index(of tab: Tab) -> Int {
+        return tabs.firstIndex(of: tab) ?? 0
+    }
+    
+    @ViewBuilder
+    func TabsView() -> some View {
+        HStack(spacing: 0) {
+            ForEach($tabs) { $tab in
+                Spacer()
+                Text(tab.title)
+                    .font(.system(size: 15, weight: .heavy))
+                    .foregroundColor(tab == currentTab ? DamusColors.adaptableBlack : .gray)
+                    .offsetX { rect in
+                        tab.minX = rect.minX
+                        tab.width = rect.width
+                    }
+                
+//                if tabs.last != tab {
+//                    Spacer(minLength: 0)
+//                }
+                
+                Spacer()
             }
         }
+        .padding(.top, 15)
+        .overlay(alignment: .bottomLeading, content: {
+            Rectangle().fill(RECTANGLE_GRADIENT)
+                .cornerRadius(2.5)
+                .frame(width: indicatorWidth, height: 3)
+                .offset(x: indicatorPosition, y: 10)
+        })
+        .overlay(alignment: .bottom, content: {
+            Divider()
+                .frame(height: 1)
+                .offset(y: 10)
+        })
     }
 }
 

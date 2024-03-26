@@ -407,6 +407,9 @@
 		5C7389B72B9E692E00781E0A /* MutinyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B62B9E692E00781E0A /* MutinyButton.swift */; };
 		5C7389B92B9E69ED00781E0A /* MutinyGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B82B9E69ED00781E0A /* MutinyGradient.swift */; };
 		5C8E588B2BACB252003D0A45 /* PostingTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E588A2BACB252003D0A45 /* PostingTimelineView.swift */; };
+		5C8E588D2BB1157D003D0A45 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E588C2BB1157D003D0A45 /* Tab.swift */; };
+		5C8E588F2BB11AB5003D0A45 /* ScrollOffset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E588E2BB11AB5003D0A45 /* ScrollOffset.swift */; };
+		5C8E58912BB11E9C003D0A45 /* LinearInterpolation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8E58902BB11E9C003D0A45 /* LinearInterpolation.swift */; };
 		5CC868DD2AA29B3200FB22BA /* NeutralButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC868DC2AA29B3200FB22BA /* NeutralButtonStyle.swift */; };
 		5CF2DCCC2AA3AF0B00984B8D /* RelayPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2DCCB2AA3AF0B00984B8D /* RelayPicView.swift */; };
 		5CF2DCCE2AABE1A500984B8D /* DamusLightGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2DCCD2AABE1A500984B8D /* DamusLightGradient.swift */; };
@@ -1332,6 +1335,9 @@
 		5C7389B62B9E692E00781E0A /* MutinyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutinyButton.swift; sourceTree = "<group>"; };
 		5C7389B82B9E69ED00781E0A /* MutinyGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutinyGradient.swift; sourceTree = "<group>"; };
 		5C8E588A2BACB252003D0A45 /* PostingTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingTimelineView.swift; sourceTree = "<group>"; };
+		5C8E588C2BB1157D003D0A45 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		5C8E588E2BB11AB5003D0A45 /* ScrollOffset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollOffset.swift; sourceTree = "<group>"; };
+		5C8E58902BB11E9C003D0A45 /* LinearInterpolation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearInterpolation.swift; sourceTree = "<group>"; };
 		5CC868DC2AA29B3200FB22BA /* NeutralButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutralButtonStyle.swift; sourceTree = "<group>"; };
 		5CF2DCCB2AA3AF0B00984B8D /* RelayPicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayPicView.swift; sourceTree = "<group>"; };
 		5CF2DCCD2AABE1A500984B8D /* DamusLightGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamusLightGradient.swift; sourceTree = "<group>"; };
@@ -2179,6 +2185,8 @@
 				D74AAFCE2B155D8C006CF0F4 /* ZapDataModel.swift */,
 				D74AAFD32B155ECB006CF0F4 /* Zaps+.swift */,
 				D74AAFD52B155F0C006CF0F4 /* WalletConnect+.swift */,
+				5C8E588E2BB11AB5003D0A45 /* ScrollOffset.swift */,
+				5C8E58902BB11E9C003D0A45 /* LinearInterpolation.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -2446,6 +2454,7 @@
 				4C28595F2A12A2BE004746F7 /* SupporterBadge.swift */,
 				5C6E1DAC2A193EC2008FC15A /* GradientButtonStyle.swift */,
 				5CC868DC2AA29B3200FB22BA /* NeutralButtonStyle.swift */,
+				5C8E588C2BB1157D003D0A45 /* Tab.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -3130,6 +3139,7 @@
 				4C32B94D2A9AD44700DC3548 /* Offset.swift in Sources */,
 				4C633350283D40E500B1C9C3 /* HomeModel.swift in Sources */,
 				4C987B57283FD07F0042CE38 /* FollowersModel.swift in Sources */,
+				5C8E58912BB11E9C003D0A45 /* LinearInterpolation.swift in Sources */,
 				4C32B9552A9AD44700DC3548 /* ByteBuffer.swift in Sources */,
 				4C32B95B2A9AD44700DC3548 /* NativeObject.swift in Sources */,
 				3AB72AB9298ECF30004BB58C /* Translator.swift in Sources */,
@@ -3167,6 +3177,7 @@
 				4C4DD3DB2A6CA7E8005B4E85 /* ContentParsing.swift in Sources */,
 				F71694F22A67314D001F4053 /* SuggestedUserView.swift in Sources */,
 				4C9BB83429C12D9900FC4E37 /* EventProfileName.swift in Sources */,
+				5C8E588D2BB1157D003D0A45 /* Tab.swift in Sources */,
 				4C7D09602A098C5D00943473 /* WalletView.swift in Sources */,
 				4CB8838F296F781C00DC99E7 /* ReactionsView.swift in Sources */,
 				BA4AB0B02A63B94D0070A32A /* EmojiListItemView.swift in Sources */,
@@ -3248,6 +3259,7 @@
 				4C463CBF2B960B96008A8C36 /* PurpleBackdrop.swift in Sources */,
 				BAB68BED29543FA3007BA466 /* SelectWalletView.swift in Sources */,
 				3169CAE6294E69C000EE4006 /* EmptyTimelineView.swift in Sources */,
+				5C8E588F2BB11AB5003D0A45 /* ScrollOffset.swift in Sources */,
 				4C32B9602A9AD44700DC3548 /* Struct.swift in Sources */,
 				4CC7AAF0297F11C700430951 /* SelectedEventView.swift in Sources */,
 				4CC7AAF8297F1CEE00430951 /* EventProfile.swift in Sources */,
