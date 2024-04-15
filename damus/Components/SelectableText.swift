@@ -8,6 +8,30 @@
 import UIKit
 import SwiftUI
 
+class ViewController: UIViewController, UITextViewDelegate {
+    @IBOutlet weak var textView: UITextView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+         addCustomMenu()
+    }
+
+
+    func addCustomMenu() {
+       //Xcode doesn't like printToConsole being a var and a function call
+       let highlight = UIMenuItem(title: "Highlight", action: #selector(createHighlight))
+
+        UIMenuController.shared.menuItems = [highlight]
+    }
+
+    @objc func createHighlight() {
+       if let range = textView.selectedTextRange, let selectedText = textView.text(in: range) {
+          print(selectedText)
+       }
+    }
+}
+
 struct SelectableText: View {
     
     let attributedString: AttributedString
@@ -115,3 +139,5 @@ fileprivate extension NSAttributedString {
         return ceil(rect.size.height)
     }
 }
+
+
