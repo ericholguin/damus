@@ -7,32 +7,6 @@
 
 import SwiftUI
 
-struct HighlightEvent {
-    let event: NostrEvent
-    
-    var event_ref: String? = nil
-    var url_ref: URL? = nil
-    var context: String? = nil
-    
-    static func parse(from ev: NostrEvent) -> HighlightEvent {
-        var highlight = HighlightEvent(event: ev)
-        
-        for tag in ev.tags {
-            guard tag.count >= 2 else { continue }
-            switch tag[0].string() {
-            case "e":   highlight.event_ref = tag[1].string()
-            case "a":   highlight.event_ref = tag[1].string()
-            case "r":   highlight.url_ref = URL(string: tag[1].string())
-            case "context": highlight.context = tag[1].string()
-            default:
-                break
-            }
-        }
-        
-        return highlight
-    }
-}
-
 struct HighlightEventBody: View {
     let state: DamusState
     let event: HighlightEvent
@@ -55,11 +29,6 @@ struct HighlightEventBody: View {
         self._artifacts = ObservedObject(wrappedValue: state.events.get_cache_data(ev.id).artifacts_model)
     }
 
-//    func Words(_ words: Int) -> Text {
-//        let wordCount = pluralizedString(key: "word_count", count: words)
-//        return Text(wordCount)
-//    }
-
     var body: some View {
         Group {
             if options.contains(.wide) {
@@ -72,13 +41,6 @@ struct HighlightEventBody: View {
 
     var Main: some View {
         VStack(alignment: .leading, spacing: 10) {
-//            if let title = event.title {
-//                Text(title)
-//                    .font(.title)
-//            } else {
-//                Text("Untitled", comment: "Text indicating that the long-form note title is untitled.")
-//                    .font(.title)
-//            }
             
             var attributedString: AttributedString {
                 var attributedString = AttributedString(event.context ?? "")
@@ -89,18 +51,20 @@ struct HighlightEventBody: View {
 
                 return attributedString
             }
-
-//            Text(event.event.content)
-//                .background(DamusColors.highlight)
             
             Text(attributedString)
                 .font(eventviewsize_to_font(.normal, font_size: state.settings.font_size))
-
-//            if case .loaded(let arts) = artifacts.state,
-//               case .longform(let longform) = arts
-//            {
-//                Words(longform.words).font(.footnote)
-//            }
+                .lineSpacing(5)
+                .padding(.top, 2)
+                        
+            if let url = event.url_ref {
+                if state.settings.media_previews {
+                    LinkViewRepresentable(meta: .url(url))
+                        .frame(height: 50)
+                } else {
+                    Text(url.absoluteString)
+                }
+            }
         }
     }
 }
@@ -125,10 +89,21 @@ struct HighlightEventView: View {
 
 struct HighlightEvent_Previews: PreviewProvider {
     static var previews: some View {
+        let test_highlight_event = HighlightEvent.parse(from: NostrEvent(
+            content: "you’re gonna make me code something.",
+            keypair: test_keypair,
+            kind: NostrKind.highlight.rawValue,
+            tags: [
+                ["context", "you’re gonna make me code something. make this a really long post that shows new lines for line spacing debugging. "],
+                ["e", "36017b098859d62e1dbd802290d59c9de9f18bb0ca00ba4b875c2930dd5891ae"],
+                ["r", "https://google.com"],
+                ["p", "32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245"],
+            ])!
+        )
         VStack {
-            LongformPreview(state: test_damus_state, ev: test_longform_event.event, options: [])
+            HighlightEventView(state: test_damus_state, ev: test_highlight_event.event, options: [])
 
-            LongformPreview(state: test_damus_state, ev: test_longform_event.event, options: [.wide])
+            HighlightEventView(state: test_damus_state, ev: test_highlight_event.event, options: [.wide])
         }
         .frame(height: 400)
     }

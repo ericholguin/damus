@@ -47,7 +47,7 @@ struct EventView: View {
                 LongformPreview(state: damus, ev: event, options: options)
             } else if event.known_kind == .highlight {
                 HighlightEventView(state: damus, ev: event, options: options)
-            }else {
+            } else {
                 TextEvent(damus: damus, event: event, pubkey: pubkey, options: options)
                     //.padding([.top], 6)
             }
