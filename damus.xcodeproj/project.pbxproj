@@ -406,7 +406,8 @@
 		5C7389B12B6EFA7100781E0A /* ProxyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B02B6EFA7100781E0A /* ProxyView.swift */; };
 		5C7389B72B9E692E00781E0A /* MutinyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B62B9E692E00781E0A /* MutinyButton.swift */; };
 		5C7389B92B9E69ED00781E0A /* MutinyGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7389B82B9E69ED00781E0A /* MutinyGradient.swift */; };
-		5CA4E1EA2B142EC500421F41 /* HighlightEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA4E1E92B142EC500421F41 /* HighlightEvent.swift */; };
+		5CA4E1EA2B142EC500421F41 /* HighlightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA4E1E92B142EC500421F41 /* HighlightView.swift */; };
+		5CC852992BCE07F20039FFC5 /* HighlightEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC852982BCE07F20039FFC5 /* HighlightEvent.swift */; };
 		5CC868DD2AA29B3200FB22BA /* NeutralButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CC868DC2AA29B3200FB22BA /* NeutralButtonStyle.swift */; };
 		5CF2DCCC2AA3AF0B00984B8D /* RelayPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2DCCB2AA3AF0B00984B8D /* RelayPicView.swift */; };
 		5CF2DCCE2AABE1A500984B8D /* DamusLightGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF2DCCD2AABE1A500984B8D /* DamusLightGradient.swift */; };
@@ -1331,7 +1332,8 @@
 		5C7389B02B6EFA7100781E0A /* ProxyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyView.swift; sourceTree = "<group>"; };
 		5C7389B62B9E692E00781E0A /* MutinyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutinyButton.swift; sourceTree = "<group>"; };
 		5C7389B82B9E69ED00781E0A /* MutinyGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutinyGradient.swift; sourceTree = "<group>"; };
-		5CA4E1E92B142EC500421F41 /* HighlightEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightEvent.swift; sourceTree = "<group>"; };
+		5CA4E1E92B142EC500421F41 /* HighlightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightView.swift; sourceTree = "<group>"; };
+		5CC852982BCE07F20039FFC5 /* HighlightEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightEvent.swift; sourceTree = "<group>"; };
 		5CC868DC2AA29B3200FB22BA /* NeutralButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeutralButtonStyle.swift; sourceTree = "<group>"; };
 		5CF2DCCB2AA3AF0B00984B8D /* RelayPicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayPicView.swift; sourceTree = "<group>"; };
 		5CF2DCCD2AABE1A500984B8D /* DamusLightGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamusLightGradient.swift; sourceTree = "<group>"; };
@@ -1652,6 +1654,7 @@
 				D74AAFC12B153395006CF0F4 /* HeadlessDamusState.swift */,
 				B5C60C1F2B530D5100C5ECA7 /* MuteItem.swift */,
 				B533694D2B66D791008A805E /* MutelistManager.swift */,
+				5CC852982BCE07F20039FFC5 /* HighlightEvent.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2393,7 +2396,7 @@
 				4CA927602A290E340098A105 /* EventShell.swift */,
 				D7870BC02AC4750B0080BA88 /* MentionView.swift */,
 				D7870BC22AC47EBC0080BA88 /* EventLoaderView.swift */,
-				5CA4E1E92B142EC500421F41 /* HighlightEvent.swift */,
+				5CA4E1E92B142EC500421F41 /* HighlightView.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -3105,6 +3108,7 @@
 				4CEE2AF5280B29E600AB5EEF /* TimeAgo.swift in Sources */,
 				4CC14FF12A73FCDB007AEB17 /* Pubkey.swift in Sources */,
 				4CA9275D2A28FF630098A105 /* LongformView.swift in Sources */,
+				5CC852992BCE07F20039FFC5 /* HighlightEvent.swift in Sources */,
 				4C75EFAD28049CFB0006080F /* PostButton.swift in Sources */,
 				D7EDED1E2B11797D0018B19C /* LongformEvent.swift in Sources */,
 				504323A92A3495B6006AE6DC /* RelayModelCache.swift in Sources */,
@@ -3466,7 +3470,7 @@
 				4CE879552996BAB900F758CC /* RelayPaidDetail.swift in Sources */,
 				4C1253602A76CF890004F4B8 /* ScrollToTopNotify.swift in Sources */,
 				4CA3529E2A76AE67003BB08B /* FollowNotify.swift in Sources */,
-				5CA4E1EA2B142EC500421F41 /* HighlightEvent.swift in Sources */,
+				5CA4E1EA2B142EC500421F41 /* HighlightView.swift in Sources */,
 				4CF0ABD42980996B00D66079 /* Report.swift in Sources */,
 				4C06670B28FDE64700038D2A /* damus.c in Sources */,
 				4C1253642A76D08F0004F4B8 /* ReportNotify.swift in Sources */,
