@@ -23,8 +23,10 @@ struct ReplyPart: View {
 
     var body: some View {
         Group {
-            if event_is_reply(event.event_refs(keypair)) {
+            if event_is_reply(event.event_refs(keypair)) && event.known_kind != .highlight {
                 ReplyDescription(event: event, replying_to: replying_to, ndb: ndb)
+            } else if event.known_kind == .highlight {
+                HighlightDescription(event: event, highlighted_event: replying_to, ndb: ndb)
             } else {
                 EmptyView()
             }
