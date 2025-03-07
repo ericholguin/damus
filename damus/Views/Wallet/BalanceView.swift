@@ -13,7 +13,7 @@ struct BalanceView: View {
     
     var body: some View {
         VStack(spacing: 5) {
-            Text("Current balance")
+            Text("Current balance", comment: "Label for displaying current wallet balance")
                 .foregroundStyle(DamusColors.neutral6)
             HStack {
                 Text("\(balance)")
@@ -23,7 +23,7 @@ struct BalanceView: View {
                     .fontWeight(.heavy)
                     .foregroundStyle(PinkGradient)
                 HStack(alignment: .top) {
-                    Text("SATS")
+                    Text("SATS", comment: "Abbreviation for Satoshis, smallest bitcoin unit")
                         .font(.system(size: 12))
                         .fontWeight(.heavy)
                         .foregroundStyle(PinkGradient)
