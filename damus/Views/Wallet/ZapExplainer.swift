@@ -15,7 +15,7 @@ struct ZapExplainerView: View {
     var body: some View {
         ScrollView {
 
-            Text("Get cash instantly from your followers")
+            Text("Get cash instantly from your followers", comment: "Feature description for receiving money instantly.")
                 .font(.system(size: 50))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
@@ -85,11 +85,11 @@ struct ZapExplainerView: View {
                 .disabled(true)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Get paid for being you")
+                    Text("Get paid for being you", comment: "Description for monetizing one's presence.")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                     
-                    Text("Setting up Zaps lets people know you're ready to start receiving money.")
+                    Text("Setting up Zaps lets people know you're ready to start receiving money.", comment: "Information about enabling payments.")
                         .font(.system(size: 16))
                 }
                 .padding(.top, 9)
@@ -109,11 +109,11 @@ struct ZapExplainerView: View {
                 .buttonStyle(NeutralButtonStyle(padding: EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10), cornerRadius: 9999))
                 .disabled(true)
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Let your fans show their support")
+                    Text("Let your fans show their support", comment: "Heading pointing out a benefit of connecting a lightning wallet.")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                     
-                    Text("You drive the conversation and we want to make it easier for people to support your work beyond follows, reposts, and likes.")
+                    Text("You drive the conversation and we want to make it easier for people to support your work beyond follows, reposts, and likes.", comment: "Text explaining the benefit of connecting a lightning wallet for content creators.")
                         .font(.system(size: 16))
                 }
                 .padding(.top, 9)
@@ -134,7 +134,7 @@ struct ZapExplainerView: View {
                 .disabled(true)
                 
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Give thanks")
+                    Text("Give thanks", comment: "Heading explaining a benefit of connecting a lightning wallet.")
                         .font(.system(size: 20))
                         .fontWeight(.bold)
                     
@@ -149,11 +149,11 @@ struct ZapExplainerView: View {
     
     var WhyZaps: some View {
         VStack(alignment: .leading, spacing: 15) {
-            Text("Why add Zaps?")
+            Text("Why add Zaps?", comment: "Heading to explain the benefits of zaps.")
                 .font(.system(size: 20))
                 .fontWeight(.bold)
             
-            Text("Zaps are an easy way to support the incredible\nvoices that make up the conversation on nostr.\nHere's how it works")
+            Text("Zaps are an easy way to support the incredible\nvoices that make up the conversation on nostr.\nHere's how it works", comment: "Describing the functional benefits of Zaps.")
                 .lineLimit(4)
                 .font(.system(size: 16))
         }
@@ -171,11 +171,11 @@ struct ZapExplainerView: View {
             .buttonStyle(NeutralButtonStyle(padding: EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10), cornerRadius: 9999))
             .disabled(true)
             
-            Text("Find a Wallet")
+            Text("Find a Wallet", comment: "Guidance for users to locate a wallet provider")
                 .font(.system(size: 20))
                 .fontWeight(.bold)
             
-            Text("Choose the third-party payment provider you'd like to use")
+            Text("Choose the third-party payment provider you'd like to use", comment: "Prompt to choose a payment provider")
                 .font(.system(size: 14))
             
             Spacer()

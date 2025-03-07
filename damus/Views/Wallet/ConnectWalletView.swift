@@ -79,7 +79,7 @@ struct ConnectWalletView: View {
     func AreYouSure(nwc: WalletConnectURL) -> some View {
         VStack(spacing: 25) {
             
-            Text("Setup Wallet")
+            Text("Setup Wallet", comment: "Heading for wallet setup confirmation screen")
                 .font(.system(size: 48))
                 .fontWeight(.bold)
                 .multilineTextAlignment(.center)
@@ -98,7 +98,7 @@ struct ConnectWalletView: View {
                     .multilineTextAlignment(.center)
                     .padding(.bottom)
                 
-                Text("Routing")
+                Text("Routing", comment: "Label indicating the routing address for Nostr Wallet Connect payments. In other words, the relay used by the NWC wallet provider")
                     .font(.system(size: 24))
                 
                 Text(nwc.relay.absoluteString)
@@ -108,7 +108,7 @@ struct ConnectWalletView: View {
                     .padding(.bottom)
                 
                 if let lud16 = nwc.lud16 {
-                    Text("Account")
+                    Text("Account", comment: "Label for the user account information with the Nostr Wallet Connect wallet provider.")
                         .font(.system(size: 24))
                     
                     Text(lud16)
@@ -156,16 +156,16 @@ struct ConnectWalletView: View {
     
     var AutomaticSetup: some View {
         VStack(spacing: 10) {
-            Text("AUTOMATIC SETUP")
+            Text("AUTOMATIC SETUP", comment: "Heading for the section that performs an automatic wallet connection setup.")
                 .font(.system(size: 12))
                 .padding(.top)
                 .foregroundStyle(PinkGradient)
             
-            Text("Create new wallet")
+            Text("Create new wallet", comment: "Button text for creating a new wallet.")
                 .font(.system(size: 28))
                 .fontWeight(.bold)
             
-            Text("Easily create a new wallet and attach it to your account.")
+            Text("Easily create a new wallet and attach it to your account.", comment: "Description for the create new wallet feature.")
                 .font(.system(size: 18))
                 .multilineTextAlignment(.center)
             
@@ -189,16 +189,16 @@ struct ConnectWalletView: View {
     
     var ManualSetup: some View {
         VStack(spacing: 10) {
-            Text("MANUAL SETUP")
+            Text("MANUAL SETUP", comment: "Label for manual wallet setup.")
                 .font(.system(size: 12))
                 .padding(.top)
                 .foregroundStyle(PinkGradient)
             
-            Text("Use existing")
+            Text("Use existing", comment: "Button text to use an existing wallet.")
                 .font(.system(size: 28))
                 .fontWeight(.bold)
             
-            Text("Attach to any third party provider you already use.")
+            Text("Attach to any third party provider you already use.", comment: "Information text guiding users on attaching existing provider.")
                 .font(.system(size: 18))
                 .multilineTextAlignment(.center)
             
@@ -252,7 +252,7 @@ struct ConnectWalletView: View {
         ScrollView {
             VStack(spacing: 25) {
                 
-                Text("Setup Wallet")
+                Text("Setup Wallet", comment: "Heading for Nostr Wallet Connect setup screen")
                     .font(.system(size: 48))
                     .fontWeight(.bold)
                     .multilineTextAlignment(.center)

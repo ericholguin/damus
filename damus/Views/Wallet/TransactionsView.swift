@@ -91,12 +91,12 @@ struct TransactionsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Latest transactions")
+            Text("Latest transactions", comment: "Heading for latest wallet transactions list")
                 .foregroundStyle(DamusColors.neutral6)
             
             if transactions.isEmpty {
                 HStack {
-                    Text("No transactions yet")
+                    Text("No transactions yet", comment: "Message shown when no transactions are available")
                         .foregroundStyle(DamusColors.neutral6)
                 }
                 .frame(maxWidth: .infinity, minHeight: 75, alignment: .center)
