@@ -29,12 +29,18 @@ struct PayInvoiceRequest: Codable {
 }
 
 struct TransactionRequest: Codable {
-    let from: UInt64? // starting timestamp in seconds since epoch (inclusive), optional
-    let until: UInt64? // ending timestamp in seconds since epoch (inclusive), optional
-    let limit: Int? // maximum number of invoices to return, optional
-    let offset: Int? // offset of the first invoice to return, optional
-    let unpaid: Bool? // include unpaid invoices, optional, default false
-    let type: String? // "incoming" for invoices, "outgoing" for payments, undefined for both
+    /// Starting timestamp in seconds since epoch (inclusive), optional.
+    let from: UInt64?
+    /// Ending timestamp in seconds since epoch (inclusive), optional.
+    let until: UInt64?
+    /// Maximum number of invoices to return, optional.
+    let limit: Int?
+    /// Offset of the first invoice to return, optional.
+    let offset: Int?
+    /// Include unpaid invoices, optional, default false.
+    let unpaid: Bool?
+    /// "incoming" for invoices, "outgoing" for payments, undefined for both.
+    let type: String?
 }
 
 func make_wallet_connect_request<T>(req: WalletRequest<T>, to_pk: Pubkey, keypair: FullKeypair) -> NostrEvent? {
@@ -68,6 +74,17 @@ func nwc_pay(url: WalletConnectURL, pool: RelayPool, post: PostBox, invoice: Str
     return ev
 }
 
+/// Sends out a wallet balance request to the NWC relay, and ensures that:
+/// 1. the NWC relay is connected and we are listening to NWC events
+/// 2. the NWC relay is connected and we are listening to NWC
+///
+/// - Parameters:
+///   - url: The NWC wallet connection URL
+///   - pool: The relay pool to connect to
+///   - post: The postbox to send events in
+///   - delay: The delay before actually send the balance request to the network
+///   - on_flush: A callback to call after the event has been flushed to the network
+/// - Returns: The Nostr Event
 @discardableResult
 func nwc_balance(url: WalletConnectURL, pool: RelayPool, post: PostBox, delay: TimeInterval? = 5.0, on_flush: OnFlush? = nil) -> NostrEvent? {
     let req = make_wallet_balance_request()
