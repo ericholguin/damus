@@ -71,6 +71,7 @@ struct ZapExplainerView: View {
             alignment: .top
         )
         .padding(.horizontal)
+        .padding(.bottom)
     }
     
     var GetPaid: some View {
