@@ -1475,6 +1475,18 @@
 		D78DB8592C1CE9CA00F0AB12 /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = D78DB8582C1CE9CA00F0AB12 /* SwipeActions */; };
 		D78DB85B2C20FE5000F0AB12 /* VectorMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78DB85A2C20FE4F00F0AB12 /* VectorMath.swift */; };
 		D78DB85F2C20FED300F0AB12 /* ChatBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78DB85E2C20FED300F0AB12 /* ChatBubbleView.swift */; };
+		D78F080C2D7F78EF00FC6C75 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F080B2D7F78EB00FC6C75 /* Request.swift */; };
+		D78F080D2D7F78EF00FC6C75 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F080B2D7F78EB00FC6C75 /* Request.swift */; };
+		D78F080E2D7F78EF00FC6C75 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F080B2D7F78EB00FC6C75 /* Request.swift */; };
+		D78F080F2D7F78EF00FC6C75 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F080B2D7F78EB00FC6C75 /* Request.swift */; };
+		D78F08112D7F78F900FC6C75 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08102D7F78F600FC6C75 /* Response.swift */; };
+		D78F08122D7F78F900FC6C75 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08102D7F78F600FC6C75 /* Response.swift */; };
+		D78F08132D7F78F900FC6C75 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08102D7F78F600FC6C75 /* Response.swift */; };
+		D78F08142D7F78F900FC6C75 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08102D7F78F600FC6C75 /* Response.swift */; };
+		D78F08172D7F7F7500FC6C75 /* NIP04.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08162D7F7F6C00FC6C75 /* NIP04.swift */; };
+		D78F08182D7F7F7500FC6C75 /* NIP04.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08162D7F7F6C00FC6C75 /* NIP04.swift */; };
+		D78F08192D7F7F7500FC6C75 /* NIP04.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08162D7F7F6C00FC6C75 /* NIP04.swift */; };
+		D78F081A2D7F803100FC6C75 /* NIP04.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78F08162D7F7F6C00FC6C75 /* NIP04.swift */; };
 		D798D21A2B0856CC00234419 /* Mentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7FF7D42823313F009601DB /* Mentions.swift */; };
 		D798D21B2B0856F200234419 /* NdbTagsIterator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD1AE12A6B3074001CD4DF /* NdbTagsIterator.swift */; };
 		D798D21C2B0857E400234419 /* Bech32Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF0ABEF29857E9200D66079 /* Bech32Object.swift */; };
@@ -2455,6 +2467,9 @@
 		D78CD5972B8990300014D539 /* DamusAppNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamusAppNotificationView.swift; sourceTree = "<group>"; };
 		D78DB85A2C20FE4F00F0AB12 /* VectorMath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorMath.swift; sourceTree = "<group>"; };
 		D78DB85E2C20FED300F0AB12 /* ChatBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleView.swift; sourceTree = "<group>"; };
+		D78F080B2D7F78EB00FC6C75 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		D78F08102D7F78F600FC6C75 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		D78F08162D7F7F6C00FC6C75 /* NIP04.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NIP04.swift; sourceTree = "<group>"; };
 		D798D21D2B0858BB00234419 /* MigratedTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigratedTypes.swift; sourceTree = "<group>"; };
 		D798D2272B085CDA00234419 /* NdbNote+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NdbNote+.swift"; sourceTree = "<group>"; };
 		D798D22B2B086C7400234419 /* NostrEvent+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NostrEvent+.swift"; sourceTree = "<group>"; };
@@ -3218,7 +3233,7 @@
 				D73E5F7E2C6AA066007EB227 /* DamusAliases.swift */,
 				E04A37C52B544F090029650D /* URIParsing.swift */,
 				4C1D4FB02A7958E60024F453 /* VersionInfo.swift */,
-				4C7D09612A098D0E00943473 /* WalletConnect.swift */,
+				D78F080A2D7F78B000FC6C75 /* WalletConnect */,
 				4C198DF329F88D23004C165C /* Images */,
 				4C198DEA29F88C6B004C165C /* BlurHash */,
 				4CE4F0F329D779B5005914DB /* PostBox.swift */,
@@ -3268,7 +3283,6 @@
 				D7EDED2D2B128E8A0018B19C /* CollectionExtension.swift */,
 				D74AAFCE2B155D8C006CF0F4 /* ZapDataModel.swift */,
 				D74AAFD32B155ECB006CF0F4 /* Zaps+.swift */,
-				D74AAFD52B155F0C006CF0F4 /* WalletConnect+.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -3577,6 +3591,7 @@
 		4CE6DEE527F7A08100C66700 /* damus */ = {
 			isa = PBXGroup;
 			children = (
+				D78F08152D7F7F5F00FC6C75 /* NIP04 */,
 				4C45E5002BED4CE10025A428 /* NIP10 */,
 				4C1D4FB32A7967990024F453 /* build-git-hash.txt */,
 				4CA3529C2A76AE47003BB08B /* Notify */,
@@ -3895,6 +3910,25 @@
 				D78DB85E2C20FED300F0AB12 /* ChatBubbleView.swift */,
 			);
 			path = Chat;
+			sourceTree = "<group>";
+		};
+		D78F080A2D7F78B000FC6C75 /* WalletConnect */ = {
+			isa = PBXGroup;
+			children = (
+				D78F08102D7F78F600FC6C75 /* Response.swift */,
+				D78F080B2D7F78EB00FC6C75 /* Request.swift */,
+				4C7D09612A098D0E00943473 /* WalletConnect.swift */,
+				D74AAFD52B155F0C006CF0F4 /* WalletConnect+.swift */,
+			);
+			path = WalletConnect;
+			sourceTree = "<group>";
+		};
+		D78F08152D7F7F5F00FC6C75 /* NIP04 */ = {
+			isa = PBXGroup;
+			children = (
+				D78F08162D7F7F6C00FC6C75 /* NIP04.swift */,
+			);
+			path = NIP04;
 			sourceTree = "<group>";
 		};
 		D79C4C152AFEB061003A41B4 /* DamusNotificationService */ = {
@@ -4531,6 +4565,7 @@
 				4CE879522996B68900F758CC /* RelayType.swift in Sources */,
 				4CE8795B2996C47A00F758CC /* ZapsModel.swift in Sources */,
 				4C3A1D3729637E0500558C0F /* PreviewCache.swift in Sources */,
+				D78F08142D7F78F900FC6C75 /* Response.swift in Sources */,
 				4C3EA67528FF7A5A00C48A62 /* take.c in Sources */,
 				4C3AC7A12835A81400E1F516 /* SetupView.swift in Sources */,
 				4C06670128FC7C5900038D2A /* RelayView.swift in Sources */,
@@ -4641,6 +4676,7 @@
 				3A4647CF2A413ADC00386AD8 /* CondensedProfilePicturesView.swift in Sources */,
 				5C14C29B2BBBA29C00079FD2 /* RelaySoftwareDetail.swift in Sources */,
 				5CB017312D4422DB00A9ED05 /* NWCSettings.swift in Sources */,
+				D78F080D2D7F78EF00FC6C75 /* Request.swift in Sources */,
 				D78DB85F2C20FED300F0AB12 /* ChatBubbleView.swift in Sources */,
 				D2277EEA2A089BD5006C3807 /* Router.swift in Sources */,
 				4C9D6D162B1AA9C6004E5CD9 /* DisplayTabBarNotify.swift in Sources */,
@@ -4717,6 +4753,7 @@
 				4C9146FE2A2A87C200DDEA40 /* nostrscript.c in Sources */,
 				4C5F9118283D88E40052CD1C /* FollowingModel.swift in Sources */,
 				4C1A9A1A29DCA17E00516EAC /* ReplyCounter.swift in Sources */,
+				D78F08182D7F7F7500FC6C75 /* NIP04.swift in Sources */,
 				50B5685329F97CB400A23243 /* CredentialHandler.swift in Sources */,
 				643EA5C8296B764E005081BB /* RelayFilterView.swift in Sources */,
 				F71694EC2A662292001F4053 /* SuggestedUsersViewModel.swift in Sources */,
@@ -4875,6 +4912,7 @@
 				82D6FABC2CD99F7900C925F4 /* refmap.c in Sources */,
 				82D6FABD2CD99F7900C925F4 /* verifier.c in Sources */,
 				82D6FABE2CD99F7900C925F4 /* NdbProfile.swift in Sources */,
+				D78F08112D7F78F900FC6C75 /* Response.swift in Sources */,
 				82D6FABF2CD99F7900C925F4 /* NdbTagIterator.swift in Sources */,
 				82D6FAC02CD99F7900C925F4 /* NdbNote.swift in Sources */,
 				82D6FAC12CD99F7900C925F4 /* AsciiCharacter.swift in Sources */,
@@ -5039,6 +5077,7 @@
 				82D6FB5E2CD99F7900C925F4 /* CredentialHandler.swift in Sources */,
 				82D6FB5F2CD99F7900C925F4 /* KeyboardVisible.swift in Sources */,
 				82D6FB602CD99F7900C925F4 /* StringUtil.swift in Sources */,
+				D78F08172D7F7F7500FC6C75 /* NIP04.swift in Sources */,
 				82D6FB612CD99F7900C925F4 /* Router.swift in Sources */,
 				82D6FB622CD99F7900C925F4 /* Log.swift in Sources */,
 				82D6FB632CD99F7900C925F4 /* AVPlayer+Additions.swift in Sources */,
@@ -5266,6 +5305,7 @@
 				82D6FC432CD99F7900C925F4 /* ReactionView.swift in Sources */,
 				82D6FC442CD99F7900C925F4 /* EventActionBar.swift in Sources */,
 				82D6FC452CD99F7900C925F4 /* EventDetailBar.swift in Sources */,
+				D78F080C2D7F78EF00FC6C75 /* Request.swift in Sources */,
 				82D6FC462CD99F7900C925F4 /* ShareAction.swift in Sources */,
 				82D6FC472CD99F7900C925F4 /* RepostAction.swift in Sources */,
 				82D6FC482CD99F7900C925F4 /* ShareActionButton.swift in Sources */,
@@ -5440,6 +5480,7 @@
 				D73E5E8A2C6A97F4007EB227 /* PurpleStoreKitManager.swift in Sources */,
 				D73E5E8D2C6A97F4007EB227 /* CameraService+Extensions.swift in Sources */,
 				D73E5E8E2C6A97F4007EB227 /* ImageResizer.swift in Sources */,
+				D78F080E2D7F78EF00FC6C75 /* Request.swift in Sources */,
 				D73E5E8F2C6A97F4007EB227 /* PhotoCaptureProcessor.swift in Sources */,
 				D773BC602C6D538500349F0A /* CommentItem.swift in Sources */,
 				D73E5E902C6A97F4007EB227 /* VideoCaptureProcessor.swift in Sources */,
@@ -5469,6 +5510,7 @@
 				D73E5EA62C6A97F4007EB227 /* FollowersModel.swift in Sources */,
 				D73E5EA72C6A97F4007EB227 /* SearchHomeModel.swift in Sources */,
 				D73E5EA82C6A97F4007EB227 /* DirectMessageModel.swift in Sources */,
+				D78F08132D7F78F900FC6C75 /* Response.swift in Sources */,
 				D73E5EA92C6A97F4007EB227 /* Report.swift in Sources */,
 				D73E5EAA2C6A97F4007EB227 /* ZapsModel.swift in Sources */,
 				D73E5EAB2C6A97F4007EB227 /* DraftsModel.swift in Sources */,
@@ -5602,6 +5644,7 @@
 				D73E5F292C6A97F4007EB227 /* ReplyDescription.swift in Sources */,
 				D73E5F2A2C6A97F4007EB227 /* RelativeTime.swift in Sources */,
 				D73E5F732C6A9885007EB227 /* TestData.swift in Sources */,
+				D78F08192D7F7F7500FC6C75 /* NIP04.swift in Sources */,
 				D73E5F2B2C6A97F4007EB227 /* ReplyPart.swift in Sources */,
 				D73E5F2C2C6A97F4007EB227 /* ProxyView.swift in Sources */,
 				D73E5F2D2C6A97F4007EB227 /* SelectedEventView.swift in Sources */,
@@ -5901,6 +5944,7 @@
 				D798D2232B0859B700234419 /* KeychainStorage.swift in Sources */,
 				D74AAFC32B153395006CF0F4 /* HeadlessDamusState.swift in Sources */,
 				D7CE1B272B0BE224002EDAD4 /* bech32_util.c in Sources */,
+				D78F08122D7F78F900FC6C75 /* Response.swift in Sources */,
 				D7CCFC102B05880F00323D86 /* Id.swift in Sources */,
 				D7CB5D532B1174E900AD4105 /* DeepLPlan.swift in Sources */,
 				D7EDED282B1180940018B19C /* ImageUploadModel.swift in Sources */,
@@ -5910,9 +5954,11 @@
 				D7CE1B332B0BE6DE002EDAD4 /* Nostr.swift in Sources */,
 				D7CE1B3D2B0BE719002EDAD4 /* Verifiable.swift in Sources */,
 				D7CE1B382B0BE719002EDAD4 /* VeriferOptions.swift in Sources */,
+				D78F080F2D7F78EF00FC6C75 /* Request.swift in Sources */,
 				D7CCFC152B05891000323D86 /* Referenced.swift in Sources */,
 				D7CE1B2B2B0BE243002EDAD4 /* hex.c in Sources */,
 				D798D2222B08598A00234419 /* ReferencedId.swift in Sources */,
+				D78F081A2D7F803100FC6C75 /* NIP04.swift in Sources */,
 				D7B76C912C82507F003A16CB /* NIP98AuthenticatedRequest.swift in Sources */,
 				D7CE1B492B0BE729002EDAD4 /* DisplayName.swift in Sources */,
 				D7CE1B192B0BE132002EDAD4 /* builder.c in Sources */,

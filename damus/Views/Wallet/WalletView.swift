@@ -68,7 +68,7 @@ struct WalletView: View {
                         let delay = damus_state.settings.nozaps ? nil : 5.0
 
                         // Update the balance when this view appears
-                        let _ = nwc_balance(url: nwc, pool: damus_state.pool, post: damus_state.postbox, delay: delay, on_flush: flusher)
+                        WalletConnect.request_balance_information(url: nwc, pool: damus_state.pool, post: damus_state.postbox, delay: delay, on_flush: flusher)
                         return
                     }
                 }
@@ -84,7 +84,7 @@ struct WalletView: View {
                         
                         let delay = damus_state.settings.nozaps ? nil : 5.0
 
-                        let _ = nwc_transactions(url: nwc, pool: damus_state.pool, post: damus_state.postbox, delay: delay, on_flush: flusher)
+                        WalletConnect.request_transaction_list(url: nwc, pool: damus_state.pool, post: damus_state.postbox, delay: delay, on_flush: flusher)
                         return
                     }
                 }

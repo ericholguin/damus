@@ -13,13 +13,15 @@ enum WalletConnectState {
     case none
 }
 
-/// Models the user's NWC wallet based on the app's settings
+/// Models and manages the user's NWC wallet based on the app's settings
 class WalletModel: ObservableObject {
     var settings: UserSettingsStore
     private(set) var previous_state: WalletConnectState
     var initial_percent: Int
+    /// The wallet's balance, in sats.
     @Published private(set) var balance: Int64 = 0
-    @Published private(set) var transactions: [NWCTransaction] = []
+    /// The list of NWC transactions made in the wallet
+    @Published private(set) var transactions: [WalletConnect.Transaction] = []
     
     @Published private(set) var connect_state: WalletConnectState
     
@@ -66,12 +68,12 @@ class WalletModel: ObservableObject {
     }
 
     /// Handles an NWC response event and updates the model.
-    ///
+    /// 
     /// This takes a response received from the NWC relay and updates the internal state of this model.
-    ///
-    /// - Parameter resp: The NWC response received from the network
-    func nwc_info_success(resp: FullWalletResponse) {
-        switch resp.response.result {
+    /// 
+    /// - Parameter response: The NWC response received from the network
+    func handle_nwc_response(response: WalletConnect.FullWalletResponse) {
+        switch response.response.result {
         case .get_balance(let balanceResp):
             self.balance = balanceResp.balance / 1000
         case .none:
