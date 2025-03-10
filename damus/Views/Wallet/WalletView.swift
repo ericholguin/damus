@@ -89,9 +89,12 @@ struct WalletView: View {
                     }
                 }
                 .sheet(isPresented: $show_settings, onDismiss: { self.show_settings = false }) {
-                    NWCSettings(damus_state: damus_state, nwc: nwc, model: model, settings: settings)
-                        .presentationDragIndicator(.visible)
-                        .presentationDetents([.large])
+                    ScrollView {
+                        NWCSettings(damus_state: damus_state, nwc: nwc, model: model, settings: settings)
+                            .padding(.top, 30)
+                    }
+                    .presentationDragIndicator(.visible)
+                    .presentationDetents([.large])
                 }
         }
     }
