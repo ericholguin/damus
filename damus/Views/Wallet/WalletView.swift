@@ -65,7 +65,7 @@ struct WalletView: View {
 
                         let flusher: OnFlush? = nil
                         
-                        let delay = damus_state.settings.nozaps ? nil : 5.0
+                        let delay = 0.0     // We don't need a delay when fetching a balance
 
                         // Update the balance when this view appears
                         WalletConnect.request_balance_information(url: nwc, pool: damus_state.pool, post: damus_state.postbox, delay: delay, on_flush: flusher)
@@ -82,7 +82,7 @@ struct WalletView: View {
 
                         let flusher: OnFlush? = nil
                         
-                        let delay = damus_state.settings.nozaps ? nil : 5.0
+                        let delay = 0.0     // We don't need a delay when fetching a transaction list
 
                         WalletConnect.request_transaction_list(url: nwc, pool: damus_state.pool, post: damus_state.postbox, delay: delay, on_flush: flusher)
                         return
