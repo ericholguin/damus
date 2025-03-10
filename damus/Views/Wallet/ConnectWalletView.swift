@@ -183,6 +183,7 @@ struct ConnectWalletView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 25)
                 .stroke(DamusColors.neutral3, lineWidth: 2)
+                .padding(2) // Avoids border clipping on the sides
         )
         .padding(.top, 20)
     }
@@ -244,6 +245,7 @@ struct ConnectWalletView: View {
         .overlay(
             RoundedRectangle(cornerRadius: 25)
                 .stroke(DamusColors.neutral3, lineWidth: 2)
+                .padding(2) // Avoids border clipping on the sides
         )
         .padding(.top, 20)
     }
