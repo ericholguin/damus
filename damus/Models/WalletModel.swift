@@ -19,9 +19,11 @@ class WalletModel: ObservableObject {
     private(set) var previous_state: WalletConnectState
     var initial_percent: Int
     /// The wallet's balance, in sats.
-    @Published private(set) var balance: Int64 = 0
+    /// Starts with `nil` to signify it is not loaded yet
+    @Published private(set) var balance: Int64? = nil
     /// The list of NWC transactions made in the wallet
-    @Published private(set) var transactions: [WalletConnect.Transaction] = []
+    /// Starts with `nil` to signify it is not loaded yet
+    @Published private(set) var transactions: [WalletConnect.Transaction]? = nil
     
     @Published private(set) var connect_state: WalletConnectState
     

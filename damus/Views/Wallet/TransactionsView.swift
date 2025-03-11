@@ -87,32 +87,45 @@ struct TransactionView: View {
 struct TransactionsView: View {
     
     let damus_state: DamusState
-    var transactions: [WalletConnect.Transaction]
+    var transactions: [WalletConnect.Transaction]?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             Text("Latest transactions", comment: "Heading for latest wallet transactions list")
                 .foregroundStyle(DamusColors.neutral6)
             
-            if transactions.isEmpty {
-                HStack {
-                    Text("No transactions yet", comment: "Message shown when no transactions are available")
-                        .foregroundStyle(DamusColors.neutral6)
-                }
-                .frame(maxWidth: .infinity, minHeight: 75, alignment: .center)
-                .padding(.horizontal, 10)
-                .background(DamusColors.neutral1)
-                .cornerRadius(10)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(DamusColors.neutral3, lineWidth: 1)
-                )
-            } else {
-                ForEach(transactions, id: \.self) { transaction in
-                    TransactionView(damus_state: damus_state, transaction: transaction)
+            if let transactions {
+                if transactions.isEmpty {
+                    emptyTransactions
+                } else {
+                    ForEach(transactions, id: \.self) { transaction in
+                        TransactionView(damus_state: damus_state, transaction: transaction)
+                    }
                 }
             }
+            else {
+                // Make sure we do not show "No transactions yet" to the user when still loading (or when failed to load)
+                // This is important because if we show that when things are not loaded properly, we risk scaring the user into thinking that they have lost funds.
+                emptyTransactions
+                    .redacted(reason: .placeholder)
+                    .shimmer(true)
+            }
         }
+    }
+    
+    var emptyTransactions: some View {
+        HStack {
+            Text("No transactions yet", comment: "Message shown when no transactions are available")
+                .foregroundStyle(DamusColors.neutral6)
+        }
+        .frame(maxWidth: .infinity, minHeight: 75, alignment: .center)
+        .padding(.horizontal, 10)
+        .background(DamusColors.neutral1)
+        .cornerRadius(10)
+        .overlay(
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(DamusColors.neutral3, lineWidth: 1)
+        )
     }
 }
 
