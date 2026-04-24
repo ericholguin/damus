@@ -42,7 +42,7 @@ struct CustomPicker<SelectionValue: Hashable>: View {
                     },
                     alignment: .bottom
                 )
-                .frame(maxWidth: .infinity)
+                .frame(minWidth: 90, maxWidth: .infinity)
                 .accentColor(tag == selection ? textColor() : .gray)
             }
         }

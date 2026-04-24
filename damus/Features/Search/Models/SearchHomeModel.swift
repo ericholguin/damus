@@ -12,6 +12,9 @@ class SearchHomeModel: ObservableObject {
     var events: EventHolder
     var followPackEvents: EventHolder
     @Published var loading: Bool = false
+    @Published var reactionCounts: [NoteId: Int] = [:]
+    @Published var repostCounts: [NoteId: Int] = [:]
+    @Published var topEngagedEvents: [NoteId: NostrEvent] = [:]
 
     var seen_pubkey: Set<Pubkey> = Set()
     var follow_pack_seen_pubkey: Set<Pubkey> = Set()
@@ -20,6 +23,7 @@ class SearchHomeModel: ObservableObject {
     let follow_pack_subid = UUID().description
     let profiles_subid = UUID().description
     let limit: UInt32 = 200
+    private let one_week: TimeInterval = 7 * 24 * 60 * 60
     //let multiple_events_per_pubkey: Bool = false
     
     init(damus_state: DamusState) {
@@ -35,6 +39,14 @@ class SearchHomeModel: ObservableObject {
     func get_base_filter() -> NostrFilter {
         var filter = NostrFilter(kinds: [.text, .chat])
         filter.limit = self.limit
+        filter.until = UInt32(Date.now.timeIntervalSince1970)
+        return filter
+    }
+
+    func get_engagement_filter() -> NostrFilter {
+        var filter = NostrFilter(kinds: [.like, .boost])
+        filter.limit = 500
+        filter.since = UInt32(Date.now.timeIntervalSince1970 - one_week)
         filter.until = UInt32(Date.now.timeIntervalSince1970)
         return filter
     }
@@ -64,12 +76,13 @@ class SearchHomeModel: ObservableObject {
         var follow_list_filter = NostrFilter(kinds: [.follow_list])
         follow_list_filter.until = UInt32(Date.now.timeIntervalSince1970)
         
-        for await item in damus_state.nostrNetwork.reader.advancedStream(filters: [get_base_filter(), follow_list_filter], to: to_relays, preloadStrategy: .preload) {
+        for await item in damus_state.nostrNetwork.reader.advancedStream(filters: [get_base_filter(), follow_list_filter, get_engagement_filter()], to: to_relays, preloadStrategy: .preload) {
             switch item {
             case .event(lender: let lender):
                 await lender.justUseACopy({ event in
                     await self.handleFollowPackEvent(event)
                     await self.handleEvent(event)
+                    await self.handleEngagementEvent(event)
                 })
             case .eose:
                 break
@@ -77,7 +90,52 @@ class SearchHomeModel: ObservableObject {
                 DispatchQueue.main.async {
                     self.loading = false
                 }
+                Task { await self.loadTopEngagedNotes(to: to_relays) }
             case .networkEose:
+                break
+            }
+        }
+    }
+
+    func loadTopEngagedNotes(to relays: [RelayURL]) async {
+        let topIds: [NoteId] = await MainActor.run {
+            let topReactionIds = reactionCounts.sorted { $0.value > $1.value }.prefix(10).map { $0.key }
+            let topRepostIds = repostCounts.sorted { $0.value > $1.value }.prefix(10).map { $0.key }
+            return Array(Set(topReactionIds + topRepostIds))
+        }
+        guard !topIds.isEmpty else { return }
+
+        var missing: [NoteId] = []
+        for id in topIds {
+            if let note = try? damus_state.ndb.lookup_note_and_copy(id) {
+                await MainActor.run { self.topEngagedEvents[id] = note }
+            } else {
+                missing.append(id)
+            }
+        }
+
+        guard !missing.isEmpty else {
+            await MainActor.run { self.objectWillChange.send() }
+            return
+        }
+
+        let filter = NostrFilter(ids: missing)
+        for await item in damus_state.nostrNetwork.reader.advancedStream(
+            filters: [filter],
+            to: relays,
+            preloadStrategy: .noPreloading
+        ) {
+            switch item {
+            case .event(lender: let lender):
+                await lender.justUseACopy { ev in
+                    await MainActor.run {
+                        self.topEngagedEvents[ev.id] = ev
+                        self.objectWillChange.send()
+                    }
+                }
+            case .networkEose:
+                return
+            default:
                 break
             }
         }
@@ -97,6 +155,20 @@ class SearchHomeModel: ObservableObject {
         }
     }
     
+    @MainActor
+    func handleEngagementEvent(_ ev: NostrEvent) {
+        guard let target_id = ev.referenced_ids.first else { return }
+        switch ev.known_kind {
+        case .like:
+            reactionCounts[target_id, default: 0] += 1
+        case .boost:
+            repostCounts[target_id, default: 0] += 1
+        default:
+            return
+        }
+        self.objectWillChange.send()
+    }
+
     @MainActor
     func handleFollowPackEvent(_ ev: NostrEvent) {
         if ev.known_kind == .follow_list && should_show_event(state: damus_state, ev: ev) && !ev.is_reply() {
